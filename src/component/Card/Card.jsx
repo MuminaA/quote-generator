@@ -1,5 +1,5 @@
 import "./../../Card.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { BsArrowRight } from "react-icons/bs";
 
@@ -8,7 +8,11 @@ function Card() {
   const [index, setIndex] = useState("");
   const [error, setError] = useState(null);
 
-  function handleClick() {
+  useEffect(() => {
+    fetchQuote();
+  }, [])
+
+  function fetchQuote() {
     setQuote("Loading...");
 
     axios
@@ -26,6 +30,10 @@ function Card() {
         setError("There was an error, please try again");
         setIndex('')
       });
+  }
+
+  function handleClick() {
+    fetchQuote();
   }
   return (
     <div className="App">
